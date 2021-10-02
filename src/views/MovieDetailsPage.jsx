@@ -46,7 +46,7 @@ export default function MovieDetailsPage() {
         </div>
       )}
       <h3 className={styles.text}>Additional information</h3>
-      <ul>
+      <ul className={styles.nav}>
         <li>
           <NavLink
             className={styles.link}

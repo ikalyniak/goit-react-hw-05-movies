@@ -32,3 +32,11 @@
   width: 500px;
   text-align: justify;
 }
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+
+  margin-bottom: 30px;
+}
