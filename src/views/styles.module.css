@@ -7,6 +7,28 @@
   font-size: 18px;
 }
 
-.text {
+.activeLink {
   color: #2196f3;
+}
+
+.link:hover,
+.link:focus {
+  color: #2196f3;
+}
+
+.text {
+  margin-bottom: 5px;
+  color: #2196f3;
+}
+
+.container {
+  display: flex;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2196f3;
+}
+
+.textContainer {
+  padding: 20px;
+  width: 500px;
+  text-align: justify;
 }

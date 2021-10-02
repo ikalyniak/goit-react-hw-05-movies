@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Route, useRouteMatch, NavLink } from 'react-router-dom';
 
+import Cast from '../components/Cast/Cast';
+import noImg from '../images/noImg.jpg';
 import * as API from '../services/movie-API';
+import styles from './styles.module.css';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+
+  const { url, path } = useRouteMatch();
+  // console.log(match);
 
   useEffect(() => {
     API.fetchMovieById(movieId).then(setMovie);
@@ -14,24 +20,55 @@ export default function MovieDetailsPage() {
   return (
     <>
       {movie && (
-        <>
-          <img
-            width="300"
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                : 'https://lh3.googleusercontent.com/proxy/mDLHqf1LeZJiGOEkrFMUd-hZnv7t-EYJVVyIyUyBdm3Iwd-ojhubeyc1D3UMN9VAfx97Jgq5nccaWB5iUyjmf1jV1vp35K8BrwJTu2C7bgekGNhn8PLv8Us'
-            }
-            alt="Poster_image"
-          />
-          <h2>{movie.original_title}</h2>
-          <p>User score: {movie.vote_average}</p>
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
-          <h4>Genres</h4>
-          <p>{movie.genres.map(item => item.name).join(', ')}</p>
-        </>
+        <div className={styles.container}>
+          <div>
+            <img
+              width="200"
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : noImg
+              }
+              alt={movie.title}
+            />
+          </div>
+
+          <div className={styles.textContainer}>
+            <h2 className={styles.text}>{movie.original_title}</h2>
+            <p className={styles.text}>User score: {movie.vote_average}</p>
+            <h3 className={styles.text}>Overview</h3>
+            <p className={styles.text}>{movie.overview}</p>
+            <h4 className={styles.text}>Genres</h4>
+            <p className={styles.text}>
+              {movie.genres.map(item => item.name).join(', ')}
+            </p>
+          </div>
+        </div>
       )}
+      <h3 className={styles.text}>Additional information</h3>
+      <ul>
+        <li>
+          <NavLink
+            className={styles.link}
+            activeClassName={styles.activeLink}
+            to={`${url}/cast`}
+          >
+            Cast
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            className={styles.link}
+            activeClassName={styles.activeLink}
+            to={`${url}/reviews`}
+          >
+            Reviews
+          </NavLink>
+        </li>
+      </ul>
+      <Route path={`${path}/cast`}>
+        <Cast id={movieId} />
+      </Route>
     </>
   );
 }

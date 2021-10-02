@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as API from '../services/movie-API';
 import styles from './styles.module.css';
 
 export default function HomePage() {
-  const { url } = useRouteMatch();
   const [movies, setMovies] = useState(null);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function HomePage() {
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              {/* <Link className={styles.link} to={`${url}/${movie.id}`}> */}
               <Link className={styles.link} to={`movies/${movie.id}`}>
                 {movie.title}
               </Link>
