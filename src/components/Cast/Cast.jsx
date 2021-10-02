@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import * as API from '../../services/movie-API';
 import noImg from '../../images/noImg.jpg';
@@ -43,3 +44,7 @@ export default function Cast({ id }) {
     </>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.number.isRequired,
+};

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import * as API from '../../services/movie-API';
 import styles from './Reviews.module.css';
 
 export default function Reviews({ id }) {
-  // const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
@@ -31,20 +31,6 @@ export default function Reviews({ id }) {
   );
 }
 
-/**
- <ul>
-        {results && results.length > 0 ? (
-          results.map(result => (
-            <li key={result.id} className={s.ReviewCard}>
-              <div className={s.imageSection}>
-                <b>{result.author}:</b>
-                <p>{result.content}</p>
-              </div>
-            </li>
-          ))
-        ) : (
-          <b>No reviews!</b>
-        )}
-      </ul>
- 
- */
+Reviews.propTypes = {
+  movieId: PropTypes.number.isRequired,
+};
