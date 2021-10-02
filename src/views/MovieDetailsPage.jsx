@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Route, useRouteMatch, NavLink } from 'react-router-dom';
 
 import Cast from '../components/Cast/Cast';
+import Reviews from '../components/Reviews/Reviews';
 import noImg from '../images/noImg.jpg';
 import * as API from '../services/movie-API';
 import styles from './styles.module.css';
@@ -11,7 +12,6 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
 
   const { url, path } = useRouteMatch();
-  // console.log(match);
 
   useEffect(() => {
     API.fetchMovieById(movieId).then(setMovie);
@@ -68,6 +68,9 @@ export default function MovieDetailsPage() {
       </ul>
       <Route path={`${path}/cast`}>
         <Cast id={movieId} />
+      </Route>
+      <Route path={`${path}/reviews`}>
+        <Reviews id={movieId} />
       </Route>
     </>
   );

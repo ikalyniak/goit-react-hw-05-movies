@@ -20,7 +20,7 @@ export default function Cast({ id }) {
             return (
               <li className={styles.card} key={item.id}>
                 <img
-                  width="200"
+                  width="100"
                   src={
                     item.profile_path
                       ? `https://image.tmdb.org/t/p/w500/${item.profile_path}`

@@ -1,0 +1,15 @@
+.reviewTitle {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #2a363b;
+  font-size: 13px;
+}
+
+.review {
+  margin-bottom: 5px;
+  width: 700px;
+  text-align: justify;
+
+  color: #2196f3;
+  font-size: 13px;
+}
