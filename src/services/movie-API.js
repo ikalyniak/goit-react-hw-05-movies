@@ -10,7 +10,7 @@ async function fetchWithErrorHandling(url = '') {
 
 export function fetchTrending() {
   return fetchWithErrorHandling(
-    `${BASE_URL}trending/all/day?api_key=${API_KEY}`,
+    `${BASE_URL}trending/movie/day?api_key=${API_KEY}`,
   );
 }
 
