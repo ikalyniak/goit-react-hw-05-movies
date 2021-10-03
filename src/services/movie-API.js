@@ -14,9 +14,9 @@ export function fetchTrending() {
   );
 }
 
-export function fetchSearch() {
+export function fetchSearch(query) {
   return fetchWithErrorHandling(
-    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
+    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
   );
 }
 

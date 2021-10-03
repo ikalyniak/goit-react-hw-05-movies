@@ -40,3 +40,41 @@
 
   margin-bottom: 30px;
 }
+
+/*  */
+
+.SearchForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  background-color: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.SearchFormInput {
+  display: inline-block;
+  width: 100%;
+  font: inherit;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid #2a363b;
+  outline: none;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.SearchFormInput::placeholder {
+  font: inherit;
+  font-size: 16px;
+}
+
+.formBtn {
+  border: none;
+  padding: 5px 20px;
+  border-radius: 3px;
+  background-color: #2196f3;
+  color: #ffffff;
+  font-size: 16px;
+}
