@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useParams, Route, useRouteMatch, NavLink } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router';
 
-import Cast from '../components/Cast/Cast';
-import Reviews from '../components/Reviews/Reviews';
+import Loader from 'react-loader-spinner';
+
 import noImg from '../images/noImg.jpg';
 import * as API from '../services/movie-API';
 import styles from './styles.module.css';
+
+const Cast = lazy(() => import('../components/Cast/Cast'));
+const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -86,12 +89,24 @@ export default function MovieDetailsPage() {
           </NavLink>
         </li>
       </ul>
-      <Route path={`${path}/cast`}>
-        <Cast id={movieId} />
-      </Route>
-      <Route path={`${path}/reviews`}>
-        <Reviews id={movieId} />
-      </Route>
+      <Suspense
+        fallback={
+          <Loader
+            type="ThreeDots"
+            color="#00BFFF"
+            height={80}
+            width={80}
+            timeout={3000}
+          />
+        }
+      >
+        <Route path={`${path}/cast`}>
+          <Cast id={movieId} />
+        </Route>
+        <Route path={`${path}/reviews`}>
+          <Reviews id={movieId} />
+        </Route>
+      </Suspense>
     </>
   );
 }
