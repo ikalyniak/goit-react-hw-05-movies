@@ -43,21 +43,17 @@ export default function MoviesPage() {
 
     setQuery(searchInput);
 
-    // console.log('searchInput', searchInput);
     history.push({
       ...location,
       search: `query=${searchInput}`,
     });
-    // console.log('searchQuery', searchQuery);
+
     setSearchInput('');
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.SearchForm}>
-        {/* <button type="button" onClick={onGoBack} className={styles.formBtn}>
-          &#x021D0;
-        </button> */}
         <input
           onChange={handleInput}
           className={styles.SearchFormInput}
