@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 export default function MoviesPage() {
   const [searchInput, setSearchInput] = useState('');
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState(null);
   const location = useLocation();
   const history = useHistory();
@@ -25,9 +24,8 @@ export default function MoviesPage() {
           setMovies(response.results);
         })
         .catch(error => toast.error('Please, enter another movie!'));
-
-      setQuery('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   const handleInput = event => {
@@ -40,8 +38,6 @@ export default function MoviesPage() {
     if (searchInput.trim() === '') {
       return toast.error('Please type your query!');
     }
-
-    setQuery(searchInput);
 
     history.push({
       ...location,

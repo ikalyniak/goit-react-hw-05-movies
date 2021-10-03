@@ -20,8 +20,10 @@ export default function MovieDetailsPage() {
     API.fetchMovieById(movieId).then(setMovie);
   }, [movieId]);
 
+  const back = location?.state?.from ?? '/movies';
+
   const onGoBack = () => {
-    history.push(location?.state?.from ?? '/movies');
+    history.push(back);
   };
 
   return (
@@ -61,7 +63,11 @@ export default function MovieDetailsPage() {
           <NavLink
             className={styles.link}
             activeClassName={styles.activeLink}
-            to={`${url}/cast`}
+            // to={`${url}/cast`}
+            to={{
+              pathname: `${url}/cast`,
+              state: { from: back },
+            }}
           >
             Cast
           </NavLink>
@@ -70,7 +76,11 @@ export default function MovieDetailsPage() {
           <NavLink
             className={styles.link}
             activeClassName={styles.activeLink}
-            to={`${url}/reviews`}
+            // to={`${url}/reviews`}
+            to={{
+              pathname: `${url}/reviews`,
+              state: { from: back },
+            }}
           >
             Reviews
           </NavLink>
