@@ -13,7 +13,7 @@ export default function Reviews({ id }) {
 
   return (
     <>
-      {reviews && reviews > 0 ? (
+      {reviews && reviews.length > 0 ? (
         <ul>
           {reviews.map(review => {
             return (
@@ -32,5 +32,5 @@ export default function Reviews({ id }) {
 }
 
 Reviews.propTypes = {
-  movieId: PropTypes.number.isRequired,
+  movieId: PropTypes.number,
 };

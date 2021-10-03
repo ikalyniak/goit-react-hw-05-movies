@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Route, useRouteMatch, NavLink } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router';
 
 import Cast from '../components/Cast/Cast';
 import Reviews from '../components/Reviews/Reviews';
@@ -12,13 +13,22 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
 
   const { url, path } = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     API.fetchMovieById(movieId).then(setMovie);
   }, [movieId]);
 
+  const onGoBack = () => {
+    history.push(location?.state?.from ?? '/movies');
+  };
+
   return (
     <>
+      <button type="button" onClick={onGoBack} className={styles.formBtn}>
+        &#x021D0;
+      </button>
       {movie && (
         <div className={styles.container}>
           <div>

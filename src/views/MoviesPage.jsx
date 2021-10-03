@@ -10,26 +10,25 @@ export default function MoviesPage() {
   const [searchInput, setSearchInput] = useState('');
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState(null);
-
-  // const location = useLocation();
-  // const history = useHistory();
-  // const params = new URLSearchParams(location.search);
-  // const foundQuery = params.get('query');
+  const location = useLocation();
+  const history = useHistory();
+  const searchQuery = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
-    if (query) {
-      API.fetchSearch(query)
+    if (searchQuery) {
+      API.fetchSearch(searchQuery)
         .then(response => {
-          // if (response.results.length === 0) {
-          //   history.push({ ...location, search: '' });
-          // }
+          if (response.results.length === 0) {
+            history.push({ ...location, search: '' });
+            toast.error('Please type another query!');
+          }
           setMovies(response.results);
         })
         .catch(error => toast.error('Please, enter another movie!'));
 
       setQuery('');
     }
-  }, [query]);
+  }, [searchQuery]);
 
   const handleInput = event => {
     setSearchInput(event.currentTarget.value.toLowerCase());
@@ -43,27 +42,22 @@ export default function MoviesPage() {
     }
 
     setQuery(searchInput);
+
+    // console.log('searchInput', searchInput);
+    history.push({
+      ...location,
+      search: `query=${searchInput}`,
+    });
+    // console.log('searchQuery', searchQuery);
     setSearchInput('');
   };
-
-  // function onInput(e) {
-  //   setQuery(e.currentTarget.value.toLowerCase());
-  // }
-  // function onSubmit(e) {
-  //   e.preventDefault();
-  //   e.target.firstChild.value = '';
-  //   if (query === '') {
-  //     toast.warning('Please, enter movie!');
-  //   } else
-  //     history.push({
-  //       ...location,
-  //       search: `query=${query}`,
-  //     });
-  // }
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.SearchForm}>
+        {/* <button type="button" onClick={onGoBack} className={styles.formBtn}>
+          &#x021D0;
+        </button> */}
         <input
           onChange={handleInput}
           className={styles.SearchFormInput}
@@ -81,7 +75,14 @@ export default function MoviesPage() {
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link className={styles.link} to={`movies/${movie.id}`}>
+              {/* <Link className={styles.link} to={`movies/${movie.id}`}> */}
+              <Link
+                className={styles.link}
+                to={{
+                  pathname: `movies/${movie.id}`,
+                  state: { from: location },
+                }}
+              >
                 {movie.title}
               </Link>
             </li>

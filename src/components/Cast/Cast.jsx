@@ -6,7 +6,6 @@ import noImg from '../../images/noImg.jpg';
 import styles from './Cast.module.css';
 
 export default function Cast({ id }) {
-  // const { movieId } = useParams();
   const [cast, setCast] = useState(null);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function Cast({ id }) {
 
   return (
     <>
-      {cast && (
+      {cast && cast.length > 0 ? (
         <ul>
           {cast.map(item => {
             return (
@@ -40,11 +39,13 @@ export default function Cast({ id }) {
             );
           })}
         </ul>
+      ) : (
+        'No information...'
       )}
     </>
   );
 }
 
 Cast.propTypes = {
-  movieId: PropTypes.number.isRequired,
+  movieId: PropTypes.number,
 };
